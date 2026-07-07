@@ -1,0 +1,22 @@
+BALANCE:dict[str, float] = {}
+
+def is_wallet_exist(wallet_name:str)-> bool:
+    return wallet_name in BALANCE
+
+def income_log(wallet_name:str, amount:float) ->float: 
+    BALANCE[wallet_name]+=amount
+    return BALANCE[wallet_name]
+
+def get_wallet_balance(wallet_name:str)->float:
+    return BALANCE[wallet_name]
+
+def expence_log(wallet_name:str, amount:float)->float:
+    BALANCE[wallet_name]-=amount
+    return BALANCE[wallet_name]
+
+def get_wallets()->dict[str, float]:
+    return BALANCE.copy()
+
+def create_wallet(name: str, amount: float)->float:
+    BALANCE[name]=amount
+    return BALANCE[name]
