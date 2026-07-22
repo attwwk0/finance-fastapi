@@ -6,7 +6,6 @@ from sqlalchemy.orm import Session
 
 
 def is_wallet_exist(db: Session, wallet_name:str)-> bool:
-    db = SessionLocal()
     return db.query(Wallet).filter(Wallet.name == wallet_name).first() 
 
 
@@ -34,6 +33,5 @@ def create_wallet(db: Session,wallet_name: str, amount: float)->Wallet:
 
     wallet = Wallet(name = wallet_name, balance = amount)
     db.add(wallet)
-    db.commit()
     db.flush()
     return wallet

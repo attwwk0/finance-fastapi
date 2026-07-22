@@ -19,13 +19,13 @@ def get_balance(db: Session, wallet_name: str | None = None):
     
 
 def create_wallet(db: Session, wallet: CreateWalletRequest):
-    if not wallet_repo.is_wallet_exist(db, wallet.name):
+    if wallet_repo.is_wallet_exist(db, wallet.name):
             raise HTTPException(
                 status_code=400,
                 detail=f"Wallet '{wallet.name}' already exists"
             )
     wallet = wallet_repo.create_wallet(db, wallet.name, wallet.initial_balance)
-    
+    db.commit()
     return {
         "message": f"Wallet {wallet.name} created",
         "wallet": wallet.name,

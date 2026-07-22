@@ -36,3 +36,11 @@ class CreateWalletRequest(BaseModel):
         if v < 0:
             raise ValueError("Amount cant be negative")
         return v
+    
+
+class UserReq(BaseModel):
+    login: str = Field(..., max_length=122)
+
+class UserRes(UserReq):
+    model_config = {"from_attributes": True}
+    id: int
